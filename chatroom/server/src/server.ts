@@ -40,6 +40,11 @@ io.on("connection", (socket) => {
     }
   })
 
+  socket.on("message", ({message, username}) => {
+    console.log('backend hit message', message, username)
+    io.to('chatroom').emit("recieve-message", ({message, username}))
+  })
+
   socket.on("disconnect", () => {
     userLeave(socket.id)
   })
