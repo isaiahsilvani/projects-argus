@@ -5,14 +5,19 @@ interface SetUsernameAction {
   username: string
 }
 
-interface SetConnected {
+interface SetConnectedAction {
   type: ActionType.SETCONNECTED,
   connected: boolean
 }
 
-interface setConnectedUsers {
+interface setConnectedUsersAction {
   type: ActionType.SETCONNECTEDUSERS,
   connectedUsers: {id: string, username: string}[]
 }
 
-export type Action = SetUsernameAction | setConnectedUsers | SetConnected
+interface setMessagesAction {
+  type: ActionType.SETMESSAGE,
+  messages: {message: string, username: string}[]
+}
+
+export type Action = SetUsernameAction | setConnectedUsersAction | SetConnectedAction | setMessagesAction

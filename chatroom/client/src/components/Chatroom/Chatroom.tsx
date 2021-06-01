@@ -18,9 +18,13 @@ const Chatroom: React.FC = () => {
   // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
+  const messages2 = useSelector((store: State) => store.messages)
+  console.log(messages2)
   console.log('username here', user)
 
+  // state for input fields
   const [username, setUsername] = useState("")
+  const [message, setMessage] = useState("")
 
   let socket = io("http://localhost:1337")
 
