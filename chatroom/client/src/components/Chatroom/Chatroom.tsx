@@ -2,10 +2,19 @@ import { SocketConstructorOpts } from 'net';
 import React, { useEffect, useState} from 'react'
 import io, { Socket } from 'socket.io-client'
 import { toast, ToastContainer } from 'react-toastify'
-
+import EnterUsername from '../EnterUsername/EnterUsername';
+// for redux
+import { actionCreators } from '../../state/';
+import { useSelector, useDispatch } from 'react-redux'
+import { store } from '../../state/store'
+import { bindActionCreators } from 'redux';
 
 
 const Chatroom: React.FC = () => {
+
+  const user = useSelector((store: State) => store.username)
+  console.log('username here', user)
+
   const [connected, setConnected] = useState(false)
   const [username, setUsername] = useState("")
   const [connectedUsers, setConnectedUsers] = useState([] as {id: string, username: string}[])
@@ -38,21 +47,14 @@ const Chatroom: React.FC = () => {
   return (
     <div className="chatroom">
       CHATROOM HERE
+      {user}
       {
         !connected &&
-          <>
-            <form onSubmit={e => {
-              e.preventDefault()
-              handleConnection()
-            }}>
-              <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                placeholder="Enter your username..." />
-              <button type='submit'>Submit</button>
-            </form>
-          </>
+        <EnterUsername 
+          handleConnection={handleConnection} 
+          setUser={setUsername}
+          username={username}
+          />
       }
 
       {
