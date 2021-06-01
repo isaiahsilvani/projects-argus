@@ -39,6 +39,29 @@ const Chatroom: React.FC = () => {
   return (
     <div className="chatroom">
       CHATROOM HERE
+      {
+        !connected &&
+          <>
+            <form onSubmit={e => {
+              e.preventDefault()
+              handleConnection()
+            }}>
+              <input
+                type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Enter your username..." />
+              <button type='submit'>Submit</button>
+            </form>
+          </>
+      }
+
+      {
+        connected &&
+        <div>
+          Connected!!
+        </div>
+      }
       <ToastContainer position="bottom-right" />
     </div>
   );
