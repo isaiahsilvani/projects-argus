@@ -21,3 +21,13 @@ export const setConnected = (connected: boolean) => {
     })
   }
 }
+
+export const setConnectedUsers = (connectedUsers: {id: string, username: string}[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    console.log("action-creator --- connected bool. that's being sent", connectedUsers)
+    dispatch({
+      type: ActionType.SETCONNECTEDUSERS,
+      connectedUsers
+    })
+  }
+}

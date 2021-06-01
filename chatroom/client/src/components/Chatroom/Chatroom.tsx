@@ -13,14 +13,14 @@ import { bindActionCreators } from 'redux';
 const Chatroom: React.FC = () => {
   // dispatch actions
   const dispatch = useDispatch()
-  const { setConnected } = bindActionCreators(actionCreators, dispatch)
-
+  const { setConnected, setConnectedUsers } = bindActionCreators(actionCreators, dispatch)
+  // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
+  const users = useSelector((store: State) => store.connectedUsers)
   console.log('username here', user)
 
   const [username, setUsername] = useState("")
-  const [connectedUsers, setConnectedUsers] = useState([] as {id: string, username: string}[])
 
   let socket = io("http://localhost:1337")
 
@@ -34,6 +34,7 @@ const Chatroom: React.FC = () => {
       socket.on("username-submitted", () => {
         console.log('username submitted client')
         setConnected(true)
+
       })
 
       socket.on("get-connected-users", (connectedUsers: {id: string, username: string}[]) => {
