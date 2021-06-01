@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import usernameReducer from './usernameReducer'
+import connectedReducer from './connectedReducer'
 
 const reducers = combineReducers({
-  username: usernameReducer
+  username: usernameReducer,
+  connected: connectedReducer
 })
 
 export default reducers

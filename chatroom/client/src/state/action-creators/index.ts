@@ -11,3 +11,13 @@ export const setUsername = (username: string) => {
     })
   }
 }
+
+export const setConnected = (connected: boolean) => {
+  return (dispatch: Dispatch<Action>) => {
+    console.log("action-creator --- connected bool. that's being sent", connected)
+    dispatch({
+      type: ActionType.SETCONNECTED,
+      connected
+    })
+  }
+}

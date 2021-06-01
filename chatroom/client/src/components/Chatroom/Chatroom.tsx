@@ -11,11 +11,14 @@ import { bindActionCreators } from 'redux';
 
 
 const Chatroom: React.FC = () => {
+  // dispatch actions
+  const dispatch = useDispatch()
+  const { setConnected } = bindActionCreators(actionCreators, dispatch)
 
   const user = useSelector((store: State) => store.username)
+  const connected = useSelector((store: State) => store.connected)
   console.log('username here', user)
 
-  const [connected, setConnected] = useState(false)
   const [username, setUsername] = useState("")
   const [connectedUsers, setConnectedUsers] = useState([] as {id: string, username: string}[])
 
