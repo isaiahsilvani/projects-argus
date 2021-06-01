@@ -15,7 +15,7 @@ const ConnectedUsers = () => {
     const dispatch = useDispatch()
     const { setUsername } = bindActionCreators(actionCreators, dispatch)
     const connectedUsers = useSelector((store: State) => store.connectedUsers)
-    const connectedUser = useSelector((store: State) => store.connectedUser)
+    const connectedUser = useSelector((store: State) => store.username)
     console.log({ connectedUsers })
 
     return (
@@ -24,8 +24,12 @@ const ConnectedUsers = () => {
         <ul>
           {connectedUsers.map((user: any) => (
             <div key={user.id}>
-              {console.log(user.username)}
-              <h5>{user.username}</h5>
+              {
+                !(user.username === connectedUser) && 
+                <>
+                <h2>{user.username}</h2>
+                </>
+              }
             </div>
           ))}
         </ul>
