@@ -10,16 +10,17 @@ const Chatroom: React.FC = () => {
   const [username, setUsername] = useState("")
   const [connectedUsers, setConnectedUsers] = useState([] as {id: string, username: string}[])
 
-  const socket = io("http://localhost:1337")
+  let socket = io("http://localhost:1337")
 
   useEffect(() => {
-    if(socket){
-
+    
       socket.on("username-taken", () => {
+        console.log('username tekn clientside')
         toast.error("Username is taken")
       })
 
       socket.on("username-submitted", () => {
+        console.log('username submitted client')
         setConnected(true)
       })
 
@@ -27,13 +28,11 @@ const Chatroom: React.FC = () => {
         setConnectedUsers(connectedUsers.filter(user => user.username !== username))
         console.log(connectedUsers)
       })
-    }
   }, [])
 
   const handleConnection = () => {
-    if(socket){
-      socket.emit("handle-connection")
-    }
+      console.log('handle connection hit', username)
+      socket.emit("handle-connection", username)
   }
 
   return (

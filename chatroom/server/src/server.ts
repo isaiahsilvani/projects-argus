@@ -25,14 +25,17 @@ const server = http.createServer(app)
 const io = new Server(server, {cors: {origin: "http://localhost:3000"}})
 
 io.on("connection", (socket) => {
-  socket.join("mychat")
 
   socket.on("handle-connection", (username: string) => {
     if (!userJoin(socket.id, username)) {
-        socket.emit("username-taken")
+        console.log('username taken hit server')
+        io.emit("username-taken")
     } else {
-        socket.emit('username-submitted')
-        io.to("myChat").emit("get-connected-users", getUsers())
+        io.emit('username-submitted')
+        console.log('username submited hit')
+        const users = getUsers()
+        console.log('users', users)
+        io.emit("get-connected-users", getUsers())
     }
   })
 
