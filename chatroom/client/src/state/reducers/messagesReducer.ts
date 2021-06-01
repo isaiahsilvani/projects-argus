@@ -5,8 +5,9 @@ const initialState: Message[] = []
 
 const reducer = (state: Message[] = initialState, action: Action) => {
   switch (action.type){
-    case ActionType.SETMESSAGE:
-      return action.messages
+    case ActionType.SETMESSAGES:
+      console.log("state: ", state, "messages: ", action.messages)
+      return state.concat(action.messages)
     default:
       return state
   }

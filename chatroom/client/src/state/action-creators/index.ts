@@ -36,7 +36,7 @@ export const SetMessages = (messages: {message: string, username: string}[]) => 
   return (dispatch: Dispatch<Action>) => {
     console.log("action-creator --- connected bool. that's being sent", messages)
     dispatch({
-      type: ActionType.SETMESSAGE,
+      type: ActionType.SETMESSAGES,
       messages
     })
   }

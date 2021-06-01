@@ -16,7 +16,7 @@ interface setConnectedUsersAction {
 }
 
 interface setMessagesAction {
-  type: ActionType.SETMESSAGE,
+  type: ActionType.SETMESSAGES,
   messages: {message: string, username: string}[]
 }
 

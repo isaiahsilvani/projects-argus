@@ -9,18 +9,17 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { bindActionCreators } from 'redux';
 import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
+import Messages from '../Messages/Messages';
 
 
 const Chatroom: React.FC = () => {
   // dispatch actions
   const dispatch = useDispatch()
-  const { setConnected, setConnectedUsers } = bindActionCreators(actionCreators, dispatch)
+  const { setConnected, setConnectedUsers, SetMessages } = bindActionCreators(actionCreators, dispatch)
   // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
-  const messages2 = useSelector((store: State) => store.messages)
-  console.log(messages2)
-  console.log('username here', user)
+  const messages = useSelector((store: State) => store.messages)
 
   // state for input fields
   const [username, setUsername] = useState("")
@@ -43,13 +42,28 @@ const Chatroom: React.FC = () => {
 
       socket.on("get-connected-users", (connectedUsers: {id: string, username: string}[]) => {
         setConnectedUsers(connectedUsers.filter(user => user.username !== username))
-        console.log(connectedUsers)
+      })
+
+      socket.on("recieve-message", ({message, username}) => {
+        console.log('reciebed, ', message, username)
+        
+        const messageFormat = {
+          username: username,
+          message: message
+        }
+        console.log('-----', [...messages, messageFormat])
+        SetMessages([...messages, messageFormat])
       })
   }, [])
 
   const handleConnection = () => {
       console.log('handle connection hit', username)
       socket.emit("handle-connection", username)
+  }
+
+  const handleSendMessage = () => {
+    console.log('handle send hit')
+    socket.emit("message", {message, username})
   }
 
   return (
@@ -67,7 +81,13 @@ const Chatroom: React.FC = () => {
 
       {
         connected &&
+        <>
           <ConnectedUsers/>
+          <Messages 
+            message={message}
+            setMessage={setMessage} 
+            handleSendMessage={handleSendMessage}/>
+        </>
       }
       <ToastContainer position="bottom-right" />
     </div>
