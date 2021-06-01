@@ -25,6 +25,7 @@ const server = http.createServer(app)
 const io = new Server(server, {cors: {origin: "http://localhost:3000"}})
 
 io.on("connection", (socket) => {
+  socket.join('chatroom')
 
   socket.on("handle-connection", (username: string) => {
     if (!userJoin(socket.id, username)) {
@@ -35,7 +36,7 @@ io.on("connection", (socket) => {
         console.log('username submited hit')
         const users = getUsers()
         console.log('users', users)
-        io.emit("get-connected-users", getUsers())
+        io.to('chatroom').emit("get-connected-users", getUsers())
     }
   })
 
