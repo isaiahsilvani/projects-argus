@@ -1,7 +1,6 @@
 import React from 'react'
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
-import { store } from '../../state/store'
 import { bindActionCreators } from 'redux';
 
 interface EnterUsernameProps {

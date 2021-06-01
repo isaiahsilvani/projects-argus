@@ -6,8 +6,9 @@ import EnterUsername from '../EnterUsername/EnterUsername';
 // for redux
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
-import { store } from '../../state/store'
+
 import { bindActionCreators } from 'redux';
+import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
 
 
 const Chatroom: React.FC = () => {
@@ -17,7 +18,6 @@ const Chatroom: React.FC = () => {
   // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
-  const users = useSelector((store: State) => store.connectedUsers)
   console.log('username here', user)
 
   const [username, setUsername] = useState("")
@@ -63,9 +63,7 @@ const Chatroom: React.FC = () => {
 
       {
         connected &&
-        <div>
-          Connected!!
-        </div>
+          <ConnectedUsers/>
       }
       <ToastContainer position="bottom-right" />
     </div>
