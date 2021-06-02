@@ -67,7 +67,7 @@ const Chatroom: React.FC = () => {
   const handleSendMessage = () => {
     console.log('handle send hit')
     socket.emit("message", {message, username})
-    
+    setMessage("")
   }
 
   return (
