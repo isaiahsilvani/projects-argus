@@ -1,6 +1,11 @@
 import React from 'react'
 
-const QuestionCard = () => {
+type Props = {
+
+}
+
+
+const QuestionCard: React.FC<Props> = () => {
   return (
     <div>
       Question Card

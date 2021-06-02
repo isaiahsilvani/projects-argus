@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 // Components
 import QuestionCard from './components/QuestionCard'
+import { useSelector } from 'react-redux'
 
 function App() {
   // make the API call when trivia game is started
@@ -18,6 +19,8 @@ function App() {
 
 
   }
+  const username = useSelector((state: any) => state.score)
+  console.log({username})
 
 
   return (
