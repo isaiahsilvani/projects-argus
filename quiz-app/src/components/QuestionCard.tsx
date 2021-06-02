@@ -10,7 +10,7 @@ const TOTAL_QUESTIONS = 10
 const QuestionCard: React.FC = () => {
   // set up action creators to manipulate state
   const dispatch = useDispatch()
-  const { setScore } = bindActionCreators(actionCreators, dispatch)
+  const { setScore, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
@@ -31,6 +31,15 @@ const QuestionCard: React.FC = () => {
       // Add score if answer is correct
       console.log(scoreState, typeof scoreState)
       if (correct) setScore(scoreState + 1)
+      // Save answer in the array for user answers
+      const answerObject = {
+        question: currentQuestion.question,
+        answer,
+        correct,
+        correctAnswer: currentQuestion.correct_answer
+      }
+      setUserAnswers([...userAnswersState, answerObject])
+      console.log(userAnswersState)
     }
   }
 
