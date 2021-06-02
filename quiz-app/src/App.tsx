@@ -40,6 +40,7 @@ function App() {
     .then((recievedData) => {
       if(recievedData){
         setQuestions(recievedData)
+        setLoading(false)  // idea - add a CSS loader!
       }
     })
   }
@@ -54,25 +55,25 @@ function App() {
 
   }
 
-  const test = () => {
-
-  }
-
   // display start button only if gameover == true or user is at last question
+  // only show score if gameover is not true
   return (
     <div className="App">
       <h1>The Ultimate Quiz</h1>
-      {!loadingState || userAnswersState.length === TOTAL_QUESTIONS ? (
+      {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
           <button className="start" onClick={startQuiz}>
             Start
           </button>
       ): null}
       
-      <p className="score">Score: </p>
-      <p>Loading Questions...</p>
-      <QuestionCard checkAnswer={checkAnswer}/>
-      <button onClick={test}>Test</button>
-      <button className="next-btn" onClick={nextQuestion}>Next Question</button>
+      {!gameoverState && <p className="score">Score: {scoreState}</p>}
+      {loadingState && <p>Loading Questions...</p> }
+      {(!loadingState && !gameoverState) && (
+          <QuestionCard checkAnswer={checkAnswer}/>
+      )}
+
+      {questionsState.length !== 0 && <button className="next-btn" onClick={nextQuestion}>Next Question</button>}
+      
     </div>
   );
 }
