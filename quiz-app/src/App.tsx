@@ -44,10 +44,6 @@ function App() {
       }
     })
   }
-  // check answer
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-
-  }
 
   // next question
   const nextQuestion = () => {
@@ -69,11 +65,13 @@ function App() {
       {!gameoverState && <p className="score">Score: {scoreState}</p>}
       {loadingState && <p>Loading Questions...</p> }
       {(!loadingState && !gameoverState) && (
-          <QuestionCard checkAnswer={checkAnswer}/>
+          <QuestionCard />
       )}
 
-      {questionsState.length !== 0 && <button className="next-btn" onClick={nextQuestion}>Next Question</button>}
-      
+      {(questionsState.length !== 0 || questionsState.length === TOTAL_QUESTIONS) && 
+      <button className="next-btn" onClick={nextQuestion}>
+        Next Question
+      </button>}
     </div>
   );
 }

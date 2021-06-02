@@ -3,16 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../state/';
 
+
 const TOTAL_QUESTIONS = 10
 
-type Props = {
-  checkAnswer: any
-}
-
-
-
 // display a question based on question number
-const QuestionCard: React.FC<Props> = ({ checkAnswer }) => {
+const QuestionCard: React.FC = () => {
+  // set up action creators to manipulate state
+  const dispatch = useDispatch()
+  const { setScore } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
@@ -24,6 +22,17 @@ const QuestionCard: React.FC<Props> = ({ checkAnswer }) => {
   console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState)
   const currentQuestion = questionsState[numberState]
   console.log(currentQuestion)
+  // check the answer on question click
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(!gameoverState){
+      const answer = e.currentTarget.value
+      // check the answer against the correct answer
+      const correct = currentQuestion.correct_answer === answer
+      // Add score if answer is correct
+      console.log(scoreState, typeof scoreState)
+      if (correct) setScore(scoreState + 1)
+    }
+  }
 
   return (
     <div>
@@ -31,7 +40,9 @@ const QuestionCard: React.FC<Props> = ({ checkAnswer }) => {
       <p className="question"> {currentQuestion.question} </p>
       {currentQuestion.answers.map((answer: string, idx: string) => (
         <div key={idx}>
-          <button>{answer}</button>
+          <button value={answer} onClick={checkAnswer}>
+            {answer}
+          </button>
         </div>
       ))}
     </div>
