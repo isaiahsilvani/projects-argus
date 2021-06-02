@@ -7,7 +7,7 @@ interface SetLoadingAction {
 
 interface SetQuestionsAction {
   type: ActionType.QUESTIONS,
-  questions: []
+  questions: Question[]
 }
 
 interface SetNumberAction {
@@ -17,7 +17,7 @@ interface SetNumberAction {
 
 interface SetUserAnswers {
   type: ActionType.USERANSWERS,
-  useranswers: []
+  useranswers: AnswerObject[]
 }
 
 interface setScoreAction {

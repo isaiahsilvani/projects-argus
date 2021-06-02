@@ -8,3 +8,10 @@ type Question = {
 }
 
 type QuestionState = Question & { answers: string[] }
+
+type AnswerObject = {
+  question: string,
+  answer: string,
+  correct: boolean,
+  correctAnswer: string
+}

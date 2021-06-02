@@ -1,9 +1,9 @@
 import { ActionType } from '../action-types/index'
 import { Action } from '../actions/index'
 
-const initialState: [] = []
+const initialState: AnswerObject[] = []
 
-const reducer = (state: [] = initialState, action: Action) => {
+const reducer = (state: AnswerObject[] = initialState, action: Action) => {
   switch (action.type){
     case ActionType.USERANSWERS:
       return action.useranswers

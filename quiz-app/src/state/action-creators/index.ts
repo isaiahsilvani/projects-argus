@@ -3,7 +3,9 @@ import { Dispatch } from "redux"    // use Dispatch type from redux to please ty
 import { Action } from '../actions/index'
 
 export const setLoading = (loading: boolean) => {
+  console.log('loading action hit: ', loading)
   return (dispatch: Dispatch<Action>) => {
+    console.log('loading action hit: ', loading)
     dispatch({
       type: ActionType.LOADING,
       loading
@@ -11,7 +13,7 @@ export const setLoading = (loading: boolean) => {
   }
 }
 
-export const setQuestions = (questions: []) => {
+export const setQuestions = (questions: Question[]) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.QUESTIONS,
@@ -29,7 +31,7 @@ export const setNumber = (number: number) => {
   }
 }
 
-export const setUserAnswers = (useranswers: []) => {
+export const setUserAnswers = (useranswers: AnswerObject[]) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.USERANSWERS,
