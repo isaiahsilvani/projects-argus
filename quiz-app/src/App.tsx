@@ -67,9 +67,10 @@ function App() {
   return (
     <div className="App">
       <h1>The Ultimate Quiz</h1>
+      {questionsState.length === userAnswersState.length && <h2>Game Over</h2>}
       {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
           <button className="start" onClick={startQuiz}>
-            Start
+            {gameoverState ? "Start" : "Reset"}
           </button>
       ): null}
       
