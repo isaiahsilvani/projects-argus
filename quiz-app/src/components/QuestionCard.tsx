@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../state/';
+import { setGameover } from '../state/action-creators';
 
 
 const TOTAL_QUESTIONS = 10
@@ -10,7 +11,7 @@ const TOTAL_QUESTIONS = 10
 const QuestionCard: React.FC = () => {
   // set up action creators to manipulate state
   const dispatch = useDispatch()
-  const { setScore, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
+  const { setScore, setUserAnswers, setNumber, setUserClicked, setGameover } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
@@ -19,17 +20,17 @@ const QuestionCard: React.FC = () => {
   const questionsState = useSelector((state: any) => state.questions)
   const numberState = useSelector((state: any) => state.number)
   const userAnswersState = useSelector((state: any) => state.userAnswers)
-  console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState)
+  const userClickedState = useSelector((state: any) => state.userClicked)
+  console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState, userClickedState)
   const currentQuestion = questionsState[numberState]
-  console.log(currentQuestion)
   // check the answer on question click
+
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     if(!gameoverState){
       const answer = e.currentTarget.value
       // check the answer against the correct answer
       const correct = currentQuestion.correct_answer === answer
       // Add score if answer is correct
-      console.log(scoreState, typeof scoreState)
       if (correct) setScore(scoreState + 1)
       // Save answer in the array for user answers
       const answerObject = {
@@ -39,7 +40,8 @@ const QuestionCard: React.FC = () => {
         correctAnswer: currentQuestion.correct_answer
       }
       setUserAnswers([...userAnswersState, answerObject])
-      console.log(userAnswersState)
+      setUserClicked(true)
+      
     }
   }
 
@@ -49,7 +51,7 @@ const QuestionCard: React.FC = () => {
       <p className="question"> {currentQuestion.question} </p>
       {currentQuestion.answers.map((answer: string, idx: string) => (
         <div key={idx}>
-          <button value={answer} onClick={checkAnswer}>
+          <button disabled={userClickedState} value={answer} onClick={checkAnswer}>
             {answer}
           </button>
         </div>

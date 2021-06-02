@@ -30,4 +30,9 @@ interface setGameOverAction {
   gameover: boolean
 }
 
-export type Action = setGameOverAction | setScoreAction | SetUserAnswers | SetNumberAction | SetLoadingAction | SetQuestionsAction
+interface setUserClickedAction {
+  type: ActionType.USERCLICKED,
+  clicked: boolean
+}
+
+export type Action = setGameOverAction | setScoreAction | SetUserAnswers | SetNumberAction | SetLoadingAction | SetQuestionsAction | setUserClickedAction

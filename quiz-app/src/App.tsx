@@ -14,7 +14,7 @@ const TOTAL_QUESTIONS = 10
 function App() {
   // set up action creators for state management
   const dispatch = useDispatch()
-  const { setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
+  const { setUserClicked, setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
@@ -23,7 +23,8 @@ function App() {
   const questionsState = useSelector((state: any) => state.questions)
   const numberState = useSelector((state: any) => state.number)
   const userAnswersState = useSelector((state: any) => state.userAnswers)
-  console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState)
+  const userClickedState = useSelector((state: any) => state.userClicked)
+  console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState, userClickedState)
   // make the API call when trivia game is started
   const startQuiz = async () => {
     // Reset everything in state so player can do the quiz again
@@ -32,7 +33,7 @@ function App() {
     setNumber(0)
     setUserAnswers([])
     setScore(0)
-    
+    setUserClicked(false)
 
     const data = fetchQuizQuestions(
       TOTAL_QUESTIONS, 
@@ -45,10 +46,20 @@ function App() {
     })
   }
 
+  
+
   // next question
   const nextQuestion = () => {
-
-
+    // move onto the next question if not the last question
+    const nextQuestion = numberState + 1
+    console.log('nextQ: ', nextQuestion, 'totalQ: ', TOTAL_QUESTIONS)
+    // if next question is last question, set gameover
+    if (nextQuestion === TOTAL_QUESTIONS){
+      setGameover(true) 
+    } else {
+      setNumber(nextQuestion)
+      setUserClicked(false)
+    }
   }
 
   // display start button only if gameover == true or user is at last question
@@ -68,10 +79,11 @@ function App() {
           <QuestionCard />
       )}
 
-      {(questionsState.length !== 0 || questionsState.length === TOTAL_QUESTIONS) && 
-      <button className="next-btn" onClick={nextQuestion}>
-        Next Question
-      </button>}
+      {((userClickedState && !gameoverState) && (questionsState.length !== userAnswersState.length)) && 
+        <button className="next-btn" onClick={nextQuestion}>
+          Next Question
+        </button>
+      }
     </div>
   );
 }
