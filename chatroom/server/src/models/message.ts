@@ -16,7 +16,7 @@ const MessageSchema: Schema = new Schema(
 // EXTRA FUNCTIONALITY OF TYPESCRIPT ALERT - post/pre function
 // Choose one of the actions you want to bind the post operation to
 MessageSchema.post<IMessage>('save', function () {
-  this.time = "This is some extra info we want to put onto this entry after the save"
+  this.time = "the current time"
 });
 
 
