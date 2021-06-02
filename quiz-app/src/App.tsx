@@ -58,11 +58,16 @@ function App() {
 
   }
 
-
+  // display start button only if gameover == true or user is at last question
   return (
     <div className="App">
       <h1>The Ultimate Quiz</h1>
-      <button className="start" onClick={startQuiz}>Start</button>
+      {!loadingState || userAnswersState.length === TOTAL_QUESTIONS ? (
+          <button className="start" onClick={startQuiz}>
+            Start
+          </button>
+      ): null}
+      
       <p className="score">Score: </p>
       <p>Loading Questions...</p>
       <QuestionCard checkAnswer={checkAnswer}/>
