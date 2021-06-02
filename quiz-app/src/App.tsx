@@ -9,13 +9,13 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from './state/';
 import QuizSettings from './components/QuizSettings/QuizSettings';
 
-const TOTAL_QUESTIONS = 10
+
 
 
 function App() {
   // set up action creators for state management
   const dispatch = useDispatch()
-  const { setUserClicked, setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
+  const { setUserClicked, setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers, setSettings } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
@@ -25,7 +25,10 @@ function App() {
   const numberState = useSelector((state: any) => state.number)
   const userAnswersState = useSelector((state: any) => state.userAnswers)
   const userClickedState = useSelector((state: any) => state.userClicked)
+  const settings = useSelector((state: any) => state.settings)
   console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState, userClickedState)
+  console.log(settings.amount, settings.difficulty)
+  const TOTAL_QUESTIONS = settings.amount
   // make the API call when trivia game is started
   const startQuiz = async () => {
     // Reset everything in state so player can do the quiz again
@@ -35,10 +38,8 @@ function App() {
     setUserAnswers([])
     setScore(0)
     setUserClicked(false)
-
-    const data = fetchQuizQuestions(
-      TOTAL_QUESTIONS, 
-      Difficulty.EASY)
+    
+    const data = fetchQuizQuestions(settings.amount, settings.difficulty)
     .then((recievedData) => {
       if(recievedData){
         setQuestions(recievedData)
@@ -47,7 +48,15 @@ function App() {
     })
   }
 
-  
+  const resetQuiz = () => {
+    setGameover(true)
+    setNumber(0)
+    setScore(0)
+    setUserClicked(false)
+    setSettings(settings.amount, settings.difficulty)
+    setQuestions([])
+    setUserAnswers([])
+  }
 
   // next question
   const nextQuestion = () => {
@@ -71,10 +80,10 @@ function App() {
       {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
         <>
         {userAnswersState.length === TOTAL_QUESTIONS && (<h2>Game Over</h2>)}
-          <button className="start" onClick={startQuiz}>
+          <button className="start" onClick={gameoverState ? startQuiz : resetQuiz}>
             {gameoverState ? "Start" : "Reset"}
           </button>
-          <QuizSettings />
+          {gameoverState && <QuizSettings />}
         </>
       ): null}
       

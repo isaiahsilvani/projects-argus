@@ -15,11 +15,16 @@ const QuizSettings = () => {
     const [difficulty, setDiffuclty] = useState("easy")
     const [amount, setAmount] = useState(10)
 
-    // a use effect that is updating the redux store when local state is changed
-    useEffect(() => {
+    // use two calls on onChange to change local and global state
+    const handleAmount = (amount:number) => {
+      setAmount(amount)
       setSettings(amount, difficulty)
+    }
 
-    }, [amount, difficulty]);
+    const handleDifficulty = (difficulty:string) => {
+      setDiffuclty(difficulty)
+      setSettings(amount, difficulty)
+    }
 
     // onChange, trigger state storage
     return (
@@ -32,11 +37,11 @@ const QuizSettings = () => {
           name="question-num" 
           value={amount} 
           onChange={e => 
-          setAmount(parseInt(e.target.value))}
+          handleAmount(parseInt(e.target.value))}
           />
 
         <label>Choose difficulty: </label>
-        <select name="difficulty-setting" id="difficulty-setting" onChange={e => setDiffuclty(e.target.value)}>
+        <select name="difficulty-setting" id="difficulty-setting" onChange={e => handleDifficulty(e.target.value)}>
             <option value={Difficulty.EASY}>Easy</option>
             <option value={Difficulty.MEDIUM}>Medium</option>
             <option value={Difficulty.HARD}>Hard</option>

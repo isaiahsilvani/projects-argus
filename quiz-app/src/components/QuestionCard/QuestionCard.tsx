@@ -5,7 +5,7 @@ import { actionCreators } from '../../state';
 import { setGameover } from '../../state/action-creators';
 import { format } from '../../utils/utils'
 
-const TOTAL_QUESTIONS = 10
+
 
 // display a question based on question number
 const QuestionCard: React.FC = () => {
@@ -21,6 +21,8 @@ const QuestionCard: React.FC = () => {
   const numberState = useSelector((state: any) => state.number)
   const userAnswersState = useSelector((state: any) => state.userAnswers)
   const userClickedState = useSelector((state: any) => state.userClicked)
+  const settings = useSelector((state: any) => state.settings)
+  const TOTAL_QUESTIONS = settings.amount
   console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState, userClickedState)
   const currentQuestion = questionsState[numberState]
   // check the answer on question click
