@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../state/';
-import { setGameover } from '../state/action-creators';
-
+import { actionCreators } from '../../state';
+import { setGameover } from '../../state/action-creators';
+import { formatQuestion } from '../../utils/utils'
 
 const TOTAL_QUESTIONS = 10
 
@@ -48,7 +48,7 @@ const QuestionCard: React.FC = () => {
   return (
     <div>
       <p className="question-number"> Question {numberState + 1} / {TOTAL_QUESTIONS}</p>
-      <p className="question"> {currentQuestion.question} </p>
+      <p className="question"> {formatQuestion(currentQuestion.question)} </p>
       {currentQuestion.answers.map((answer: string, idx: string) => (
         <div key={idx}>
           <button disabled={userClickedState} value={answer} onClick={checkAnswer}>

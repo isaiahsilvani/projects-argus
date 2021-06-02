@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 // Components
-import QuestionCard from './components/QuestionCard'
+import QuestionCard from './components/QuestionCard/QuestionCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchQuizQuestions, Difficulty } from './services/questions-api'
 // action creators for redux store state management
@@ -67,15 +67,17 @@ function App() {
   return (
     <div className="App">
       <h1>The Ultimate Quiz</h1>
-      {questionsState.length === userAnswersState.length && <h2>Game Over</h2>}
       {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
+        <>
+        {userAnswersState.length === TOTAL_QUESTIONS && (<h2>Game Over</h2>)}
           <button className="start" onClick={startQuiz}>
             {gameoverState ? "Start" : "Reset"}
           </button>
+        </>
       ): null}
       
       {!gameoverState && <p className="score">Score: {scoreState}</p>}
-      {loadingState && <p>Loading Questions...</p> }
+      {loadingState && <p>loading...</p> }
       {(!loadingState && !gameoverState) && (
           <QuestionCard />
       )}
