@@ -15,7 +15,7 @@ const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMess
     return (
       <div className="messages">
       <li className="message-list scrollable">
-        {messages.map((message: any, idx: number) => (
+        {messages.map((message: Message, idx: number) => (
           <div key={idx}>
             <p>{message.message}</p>
             <p>{message.username}</p>

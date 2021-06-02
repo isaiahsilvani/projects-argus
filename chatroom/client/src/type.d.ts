@@ -9,5 +9,11 @@ type User = {
 
 type Message = {
   message: string,
-  username: string
+  username: string,
+}
+
+type ApiDataType = {
+  message: string,
+  username: string,
+  time: string
 }

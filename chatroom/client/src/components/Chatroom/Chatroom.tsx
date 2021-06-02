@@ -11,6 +11,8 @@ import { bindActionCreators } from 'redux';
 import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
 import Messages from '../Messages/Messages';
 
+import * as api from '../../services/message-api'
+
 
 const Chatroom: React.FC = () => {
   // dispatch actions
@@ -52,6 +54,7 @@ const Chatroom: React.FC = () => {
           message: message
         }
         console.log('-----', [...messages, messageFormat])
+        // create Message in database with API as well as storing in state
         SetMessages([...messages, messageFormat])
       })
   }, [])
@@ -64,6 +67,7 @@ const Chatroom: React.FC = () => {
   const handleSendMessage = () => {
     console.log('handle send hit')
     socket.emit("message", {message, username})
+    
   }
 
   return (
