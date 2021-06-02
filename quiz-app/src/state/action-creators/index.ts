@@ -2,6 +2,19 @@ import { ActionType } from "../action-types"
 import { Dispatch } from "redux"    // use Dispatch type from redux to please typescript
 import { Action } from '../actions/index'
 
+export const setSettings = (amount: number, difficulty: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    console.log('clicked action hit: ', amount, difficulty)
+    dispatch({
+      type: ActionType.SETTINGS,
+      settings: {
+        amount,
+        difficulty
+      }
+    })
+  }
+}
+
 export const setUserClicked = (clicked: boolean) => {
   console.log('clicked action hit: ', clicked)
   return (dispatch: Dispatch<Action>) => {

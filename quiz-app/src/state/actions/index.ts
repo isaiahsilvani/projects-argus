@@ -35,4 +35,13 @@ interface setUserClickedAction {
   clicked: boolean
 }
 
-export type Action = setGameOverAction | setScoreAction | SetUserAnswers | SetNumberAction | SetLoadingAction | SetQuestionsAction | setUserClickedAction
+interface setQuizSettings {
+  type: ActionType.SETTINGS,
+  settings: {amount: number, difficulty: string}
+}
+
+export type Action = 
+  setGameOverAction    | setScoreAction 
+| SetUserAnswers       | SetNumberAction 
+| SetLoadingAction     | SetQuestionsAction 
+| setUserClickedAction | setQuizSettings

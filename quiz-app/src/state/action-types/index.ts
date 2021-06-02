@@ -5,5 +5,6 @@ export enum ActionType {
   USERANSWERS = 'useranswers',
   SCORE = 'score',
   GAMEOVER = 'gameover',
-  USERCLICKED = 'userclicked'
+  USERCLICKED = 'userclicked',
+  SETTINGS = 'SETTINGS'
 }

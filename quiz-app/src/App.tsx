@@ -7,6 +7,7 @@ import { fetchQuizQuestions, Difficulty } from './services/questions-api'
 // action creators for redux store state management
 import { bindActionCreators } from 'redux';
 import { actionCreators } from './state/';
+import QuizSettings from './components/QuizSettings/QuizSettings';
 
 const TOTAL_QUESTIONS = 10
 
@@ -73,6 +74,7 @@ function App() {
           <button className="start" onClick={startQuiz}>
             {gameoverState ? "Start" : "Reset"}
           </button>
+          <QuizSettings />
         </>
       ): null}
       
