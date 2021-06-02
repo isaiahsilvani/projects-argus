@@ -14,6 +14,7 @@ type Message = {
 
 type ApiDataType = {
   message: string,
+  messages: {}[],
   username: string,
   time: string
 }

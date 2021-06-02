@@ -25,6 +25,16 @@ export const saveMsgRequest = async (message: any) => {
   }
 }
 
-export const getMsgsRequest = async (username: string, message: string) => {
-  console.log('getMsgRequest hit')
+export const getMsgsRequest = async () => {
+  console.log('get Mesg Requesttt')
+  try {
+
+    const payload: AxiosResponse<ApiDataType> = await axios.get(baseUrl)
+
+    console.log('recieved payload in services api: ', payload.data.messages)
+    return await payload.data.messages as any
+
+  } catch (error) {
+    throw new Error(error)
+  }
 }

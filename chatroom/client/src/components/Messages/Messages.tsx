@@ -1,5 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import * as api from '../../services/message-api'
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../state/';
 
 interface MessagesProps {
   message: string,
@@ -9,8 +12,18 @@ interface MessagesProps {
 
 const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMessage }) => {
 
+    const dispatch = useDispatch()
+    const { SetMessages } = bindActionCreators(actionCreators, dispatch)
 
     const messages = useSelector((store: State) => store.messages)
+
+    useEffect(() => {
+      api.getMsgsRequest()
+      .then(data => {
+        console.log('set this data', data)
+        if (data){ SetMessages(data) }
+      })
+    }, []);
 
     return (
       <div className="messages">

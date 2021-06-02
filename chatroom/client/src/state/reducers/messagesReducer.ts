@@ -3,7 +3,7 @@ import { Action } from '../actions/index'
 // store message inside database
 import * as api from '../../services/message-api'
 
-const initialState: Message[] = []
+let initialState: Message[] = []
 
 const reducer = (state: Message[] = initialState, action: Action) => {
   switch (action.type){
