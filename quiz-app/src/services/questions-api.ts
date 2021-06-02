@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { shuffleArray } from '../utils/utils'
 
 export enum Difficulty {
   EASY = "easy",
@@ -12,7 +13,16 @@ export const fetchQuizQuestions = async (amount: number, difficulty: Difficulty)
   try {
 
     const payload: AxiosResponse = await axios.get(endpoint)
-    return payload.data.results
+
+    return payload.data.results.map((question: Question) => (
+      {
+        ...question,
+        answers: shuffleArray([
+          ...question.incorrect_answers, 
+          question.correct_answer
+        ])
+      }
+    ))
 
   } catch (error){
 
