@@ -14,25 +14,33 @@ const TOTAL_QUESTIONS = 10
 function App() {
   // set up action creators for state management
   const dispatch = useDispatch()
-  const { setGameover, setLoading, setQuestions } = bindActionCreators(actionCreators, dispatch)
+  const { setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
   const scoreState = useSelector((state: any) => state.score)
   const loadingState = useSelector((state: any) => state.loading)
   const gameoverState = useSelector((state: any) => state.gameover)
   const questionsState = useSelector((state: any) => state.questions)
-  console.log(scoreState, loadingState, gameoverState, questionsState)
+  const numberState = useSelector((state: any) => state.number)
+  const userAnswersState = useSelector((state: any) => state.userAnswers)
+  console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState)
   // make the API call when trivia game is started
   const startQuiz = async () => {
+    // Reset everything in state so player can do the quiz again
     setGameover(false)
     setLoading(true)
+    setNumber(0)
+    setUserAnswers([])
+    setScore(0)
+    
 
     const data = fetchQuizQuestions(
       TOTAL_QUESTIONS, 
       Difficulty.EASY)
     .then((recievedData) => {
-      console.log('data reciebed', recievedData)
-      setQuestions(recievedData)
+      if(recievedData){
+        setQuestions(recievedData)
+      }
     })
   }
   // check answer
