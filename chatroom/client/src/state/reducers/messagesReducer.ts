@@ -13,6 +13,8 @@ const reducer = (state: Message[] = initialState, action: Action) => {
       return state.concat(action.messages)
     case ActionType.CLEARMESSAGES:
       return []
+    case ActionType.GETMESSAGES:
+      return action.messages
     default:
       return state
   }

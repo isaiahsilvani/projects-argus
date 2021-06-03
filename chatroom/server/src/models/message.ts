@@ -5,7 +5,7 @@ import IMessage from '../interfaces/message'
 const MessageSchema: Schema = new Schema(
   {
       username: { type: String, required: true },
-      message: { type: String, required: true},
+      message: { type: String },
       time: { type: String }
   },
   {

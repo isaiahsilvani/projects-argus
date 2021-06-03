@@ -25,8 +25,16 @@ interface setCurrent {
   current: boolean
 }
 
-interface clearMessages {
+interface clearMessagesAction {
   type: ActionType.CLEARMESSAGES
 }
 
-export type Action = SetUsernameAction | setConnectedUsersAction | SetConnectedAction | setMessagesAction | setCurrent | clearMessages
+interface GetMessagesAction {
+  type: ActionType.GETMESSAGES,
+  messages: {message: string, username: string}[]
+}
+
+export type Action = SetUsernameAction | setConnectedUsersAction 
+| SetConnectedAction | setMessagesAction 
+| setCurrent         | clearMessagesAction 
+| GetMessagesAction

@@ -59,3 +59,12 @@ export const ClearMessages = () => {
     })
   }
 }
+
+export const GetMessages = (messages: {message: string, username: string}[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.GETMESSAGES,
+      messages
+    })
+  }
+}

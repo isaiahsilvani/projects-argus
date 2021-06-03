@@ -28,7 +28,7 @@ const Chatroom: React.FC = () => {
   const [username, setUsername] = useState("")
   const [message, setMessage] = useState("")
 
-  let socket = io("http://localhost:1337")
+  let socket = io("http://localhost:1338")
 
   useEffect(() => {
     

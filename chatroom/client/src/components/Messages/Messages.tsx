@@ -13,15 +13,15 @@ interface MessagesProps {
 const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMessage }) => {
 
     const dispatch = useDispatch()
-    const { SetMessages } = bindActionCreators(actionCreators, dispatch)
+    const { SetMessages, GetMessages } = bindActionCreators(actionCreators, dispatch)
 
     const messages = useSelector((store: State) => store.messages)
 
     useEffect(() => {
       api.getMsgsRequest()
       .then(data => {
-        console.log('set this data', data)
-        if (data){ SetMessages(data) }
+        console.log('set this data-----', data)
+        GetMessages(data)
       })
     }, []);
 
@@ -35,20 +35,13 @@ const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMess
           </div>
         ))}
       </li>
-
-      <form onSubmit={e => {
-        e.preventDefault()
-
-        handleSendMessage()
-      }}>
         <input 
           type="text" 
           placeholder="Type your message..." 
           value={message}
           onChange={e => setMessage(e.target.value)} 
           />
-        <button type='submit'>Send</button>
-      </form>
+        <button onClick={handleSendMessage} type='submit'>Send</button>
     </div>
     );
 }
