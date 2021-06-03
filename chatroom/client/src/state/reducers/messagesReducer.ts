@@ -11,6 +11,8 @@ const reducer = (state: Message[] = initialState, action: Action) => {
       console.log("state: ", state, "messages: ", action.messages)
       api.saveMsgRequest(action.messages)
       return state.concat(action.messages)
+    case ActionType.CLEARMESSAGES:
+      return []
     default:
       return state
   }

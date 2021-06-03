@@ -51,3 +51,11 @@ export const SetMessages = (messages: {message: string, username: string}[]) => 
     })
   }
 }
+
+export const ClearMessages = () => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CLEARMESSAGES,
+    })
+  }
+}
