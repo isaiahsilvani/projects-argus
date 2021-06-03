@@ -12,6 +12,7 @@ const Header = () => {
     const messages = useSelector((store: State) => store.messages)
 
     const handleClick = () => {
+      api.deleteMessages()
       ClearMessages()
     }
 

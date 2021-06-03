@@ -2,6 +2,14 @@ import { Request, Response, NextFunction} from 'express'
 import mongoose from 'mongoose'
 import Message from '../models/message'
 
+const deleteMessages = (req: Request, res: Response, next: NextFunction) => {
+  Message.deleteMany()
+  .then(()=> {
+    console.log('messages deleted!!!')
+    res.status(200)
+  })
+}
+
 const getMessages = (req: Request, res: Response, next: NextFunction) => {
   Message.find()
   .exec()
@@ -39,5 +47,6 @@ const createMessage = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   getMessages,
-  createMessage
+  createMessage,
+  deleteMessages
 }

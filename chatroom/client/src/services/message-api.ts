@@ -41,3 +41,11 @@ export const getMsgsRequest = async () => {
     throw new Error(error)
   }
 }
+
+export const deleteMessages = async () => {
+  try{
+    await axios.delete(baseUrl)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
