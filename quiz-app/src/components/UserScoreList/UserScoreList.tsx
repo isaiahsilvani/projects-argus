@@ -3,6 +3,32 @@ import * as userscore_api from '../../services/userscore-api'
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
+import styled from '@emotion/styled'
+
+const UserScores = styled.div`
+  padding: 10px;
+  background-color: lightblue;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const Td = styled.td`
+  margin: 20em;
+  font-size: 1.3em;
+  padding: 0.3em 1em;
+`
+
+const Table = styled.table`
+  border: 1px solid black;
+`
+
+const Thead = styled.thead`
+  font-size: 1.3em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+`
 
 const UserScoreList = () => {
     const dispatch = useDispatch()
@@ -22,25 +48,28 @@ const UserScoreList = () => {
 
     return (
       <div className="userscores-list">
-        <h5>User Scores</h5>
-        <table>
-          <thead>
+        <UserScores>
+        <h2>User Scores</h2>
+        <Table>
+          <Thead>
             <tr>
-              <td>Username</td>
-              <td>Score</td>
-              <td>Difficulty</td>
+              <Td>Username</Td>
+              <Td>Score</Td>
+              <Td>Difficulty</Td>
             </tr>
-          </thead>
+          </Thead>
           <tbody>
+            {userScores.length === 0 && <p>Loading...</p>}
             {userScores.map((userscore: any, idx: string) => (
               <tr key={idx}>
-                <td>{userscore.username}</td>
-                <td>{userscore.score}</td>
-                <td>{userscore.difficulty}</td>
+                <Td>{userscore.username}</Td>
+                <Td>{userscore.score}</Td>
+                <Td>{userscore.difficulty}</Td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
+        </UserScores>
       </div>
     );
 }

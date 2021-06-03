@@ -3,6 +3,30 @@ import { Difficulty } from '../../services/questions-api'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
+import styled from '@emotion/styled'
+
+const Settings = styled.div`
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.5em;
+`
+
+const Label = styled.label`
+  margin: 10px;
+`
+
+const Input = styled.input`
+  font-size: 1em;
+  text-align: center;
+`
+
+const Select = styled.select`
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 1.3em;
+`
 
 const QuizSettings = () => {
     // here are the settings in state
@@ -29,23 +53,24 @@ const QuizSettings = () => {
     // onChange, trigger state storage
     return (
       <div className="quiz-settings">
+        <Settings>
+          <Label># of Questions: </Label>
+          <Input 
+            type="number" 
+            id="quiznum" 
+            name="question-num" 
+            value={amount} 
+            onChange={e => 
+            handleAmount(parseInt(e.target.value))}
+            />
 
-        <label># of Questions: </label>
-        <input 
-          type="number" 
-          id="quiznum" 
-          name="question-num" 
-          value={amount} 
-          onChange={e => 
-          handleAmount(parseInt(e.target.value))}
-          />
-
-        <label>Choose difficulty: </label>
-        <select name="difficulty-setting" id="difficulty-setting" onChange={e => handleDifficulty(e.target.value)}>
-            <option value={Difficulty.EASY}>Easy</option>
-            <option value={Difficulty.MEDIUM}>Medium</option>
-            <option value={Difficulty.HARD}>Hard</option>
-        </select>
+          <Label>Choose difficulty: </Label>
+          <Select name="difficulty-setting" id="difficulty-setting" onChange={e => handleDifficulty(e.target.value)}>
+              <option value={Difficulty.EASY}>Easy</option>
+              <option value={Difficulty.MEDIUM}>Medium</option>
+              <option value={Difficulty.HARD}>Hard</option>
+          </Select>
+        </Settings>
       </div>
     );
 }

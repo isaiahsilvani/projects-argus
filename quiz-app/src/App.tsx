@@ -11,8 +11,47 @@ import QuizSettings from './components/QuizSettings/QuizSettings';
 import UserInput from './components/UserInput/UserInput';
 import UserScoreList from './components/UserScoreList/UserScoreList';
 
+import styled from '@emotion/styled'
+
+const Background = styled.div`
+  background-color: lightpink;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`
 
 
+const Button = styled.button`
+  font-size: 1.4em;
+  padding: 0.3em 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid black;
+  &:hover{
+    color: white;
+    background-color: darkgrey;
+    cursor: pointer;
+  }
+  &:active{
+    background-color: #2E2E2E
+  }
+`
+
+const StartButton = styled.button`
+  font-size: 1.4em;
+  padding: 0.3em 0.8em;
+  width: 9.4em;
+  margin-bottom: 1em;
+  border: 1px solid black;
+  &:hover{
+    color: white;
+    background-color: darkgrey;
+    cursor: pointer;
+  }
+  &:active{
+    background-color: #2E2E2E
+  }
+`
 
 function App() {
   // set up action creators for state management
@@ -42,6 +81,7 @@ function App() {
     setUserAnswers([])
     setScore(0)
     setUserClicked(false)
+    setSeeUserScores(false)
     
     const data = fetchQuizQuestions(settings.amount, settings.difficulty)
     .then((recievedData) => {
@@ -79,42 +119,45 @@ function App() {
   // display start button only if gameover == true or user is at last question
   // only show score if gameover is not true
   return (
-    <div className="App">
-      <h1>The Ultimate Quiz</h1>
-      {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
-        <>
-        {userAnswersState.length === TOTAL_QUESTIONS && (<h2>Game Over</h2>)}
-        {!loadingState && (
-          <>
-                      <button className="start" onClick={gameoverState ? startQuiz : resetQuiz}>
-            {gameoverState ? "Start" : "Reset"}
-          </button>
-          <button onClick={() => setSeeUserScores(!seeUserScores)}>
-            {seeUserScores ? 'Close User Scores' : 'See User Scores'}
-          </button>
-          {(!gameoverState && !loadingState) && <UserInput/>}
-          {gameoverState && <QuizSettings />}
-          </>
-        )}
-        </>
-      ): null}
+    <Background>
       
-      {(!gameoverState && !loadingState) && <p className="score">Score: {scoreState}</p>}
-      {loadingState && <p>loading...</p> }
-      {(!loadingState && !gameoverState) && (
-          <QuestionCard />
-      )}
 
-      {((userClickedState && !gameoverState) && (questionsState.length !== userAnswersState.length)) && 
-        <button className="next-btn" onClick={nextQuestion}>
-          Next Question
-        </button>
-      }
+        <h1>The Ultimate Quiz</h1>
+        {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
+          <>
+          {userAnswersState.length === TOTAL_QUESTIONS && (<h2>Game Over</h2>)}
+          {!loadingState && (
+            <>
+              {gameoverState && <QuizSettings />}
+              <StartButton className="start" onClick={gameoverState ? startQuiz : resetQuiz}>
+                {gameoverState ? "Start" : "Reset"}
+              </StartButton>
+              <Button onClick={() => setSeeUserScores(!seeUserScores)}>
+                {seeUserScores ? 'Close User Scores' : 'See User Scores'}
+              </Button>
+              {(!gameoverState && !loadingState) && <UserInput/>}
+              
+            </>
+          )}
+          </>
+        ): null}
+        
+        {(!gameoverState && !loadingState) && <p className="score">Score: {scoreState}</p>}
+        {loadingState && <p>loading...</p> }
+        {(!loadingState && !gameoverState) && (
+            <QuestionCard />
+        )}
 
-      {seeUserScores && (
-        <UserScoreList/>
-      )}
-    </div>
+        {((userClickedState && !gameoverState) && (questionsState.length !== userAnswersState.length)) && 
+          <button className="next-btn" onClick={nextQuestion}>
+            Next Question
+          </button>
+        }
+
+        {seeUserScores && (
+          <UserScoreList/>
+        )}
+      </Background>
   );
 }
 
