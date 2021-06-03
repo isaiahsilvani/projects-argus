@@ -2,5 +2,6 @@ export enum ActionType {
   SETUSERNAME = 'setusername',
   SETCONNECTED = 'setconnected',
   SETCONNECTEDUSERS = 'setconnectedusers',
-  SETMESSAGES = 'setmessages'
+  SETMESSAGES = 'setmessages',
+  SETCURRENT = 'setcurrent'
 }

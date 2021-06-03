@@ -21,6 +21,7 @@ const Chatroom: React.FC = () => {
   // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
+  const current = useSelector((store: State) => store.current)
   const messages = useSelector((store: State) => store.messages)
 
   // state for input fields
@@ -39,7 +40,6 @@ const Chatroom: React.FC = () => {
       socket.on("username-submitted", () => {
         console.log('username submitted client')
         setConnected(true)
-
       })
 
       socket.on("get-connected-users", (connectedUsers: {id: string, username: string}[]) => {
@@ -70,12 +70,14 @@ const Chatroom: React.FC = () => {
     setMessage("")
   }
 
+  console.log(user)
+
   return (
     <div className="chatroom">
       CHATROOM HERE
       {user}
       {
-        !connected &&
+        (!connected || !current) &&
         <EnterUsername 
           handleConnection={handleConnection} 
           setUser={setUsername}
@@ -84,7 +86,7 @@ const Chatroom: React.FC = () => {
       }
 
       {
-        connected &&
+        (connected && current) &&
         <>
           <ConnectedUsers/>
           <Messages 

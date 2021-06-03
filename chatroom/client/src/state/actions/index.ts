@@ -20,4 +20,9 @@ interface setMessagesAction {
   messages: {message: string, username: string}[]
 }
 
-export type Action = SetUsernameAction | setConnectedUsersAction | SetConnectedAction | setMessagesAction
+interface setCurrent {
+  type: ActionType.SETCURRENT,
+  current: boolean
+}
+
+export type Action = SetUsernameAction | setConnectedUsersAction | SetConnectedAction | setMessagesAction | setCurrent

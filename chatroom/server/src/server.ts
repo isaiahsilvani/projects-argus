@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 /** Routes **/
-app.use('/api/message', messageRoutes)
+app.use('/api/messages', messageRoutes)
 
 /** Error Handling **/
 app.use((req, res, next) => {

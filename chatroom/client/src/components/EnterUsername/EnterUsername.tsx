@@ -11,12 +11,13 @@ interface EnterUsernameProps {
 
 const EnterUsername: React.FC<EnterUsernameProps> = ({ username, setUser, handleConnection }) => {
   const dispatch = useDispatch()
-  const { setUsername } = bindActionCreators(actionCreators, dispatch)
+  const { setUsername, setCurrent } = bindActionCreators(actionCreators, dispatch)
   const user = useSelector((store: State) => store.username)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     console.log('username to set in redux store: ', username)
+    setCurrent(true)
     handleConnection(username)
     setUsername(username)
   }
