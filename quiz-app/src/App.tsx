@@ -13,6 +13,32 @@ import UserScoreList from './components/UserScoreList/UserScoreList';
 
 import styled from '@emotion/styled'
 
+const NextQuestion = styled.button`
+  margin: 10px 0;
+  color: black;
+  font-size: 1.2em;
+  padding: 8px 10px;
+  background-color: #C7F2F2;
+  &:hover{
+    background-color: #E6F7F7;
+    cursor: pointer;
+  }
+  &:active{
+    color: white;
+    background-color: #138080
+  }
+  &:disabled{
+    cursor: not-allowed;
+    background-color: #D5E6E6;
+  }
+
+`
+
+const Score = styled.span`
+  font-size: 2.4em;
+  font-weight: 600;
+`
+
 const Background = styled.div`
   background-color: lightpink;
   display: flex;
@@ -142,16 +168,16 @@ function App() {
           </>
         ): null}
         
-        {(!gameoverState && !loadingState) && <p className="score">Score: {scoreState}</p>}
+        {(!gameoverState && !loadingState) && <p className="score"><Score>Score: {scoreState}</Score></p>}
         {loadingState && <p>loading...</p> }
         {(!loadingState && !gameoverState) && (
             <QuestionCard />
         )}
 
         {((userClickedState && !gameoverState) && (questionsState.length !== userAnswersState.length)) && 
-          <button className="next-btn" onClick={nextQuestion}>
+          <NextQuestion className="next-btn" onClick={nextQuestion}>
             Next Question
-          </button>
+          </NextQuestion>
         }
 
         {seeUserScores && (

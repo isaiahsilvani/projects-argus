@@ -4,8 +4,42 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { setGameover } from '../../state/action-creators';
 import { format } from '../../utils/utils'
+import styled from '@emotion/styled'
 
+const QuestionCardStyle = styled.div`
+  text-align: left
+`
 
+const Question = styled.div`
+  font-size: 1.7em;
+  font-weight: 500;
+`
+
+const QuestionText = styled.div`
+  font-size: 1.3em;
+  margin: 1em 0;
+`
+
+const Answer = styled.button`
+  margin: 10px 0;
+  color: black;
+  font-size: 1.2em;
+  padding: 8px 10px;
+  background-color: #C7F2F2;
+  &:hover{
+    background-color: #E6F7F7;
+    cursor: pointer;
+  }
+  &:active{
+    color: white;
+    background-color: #138080
+  }
+  &:disabled{
+    cursor: not-allowed;
+    background-color: #D5E6E6;
+  }
+
+`
 
 // display a question based on question number
 const QuestionCard: React.FC = () => {
@@ -49,15 +83,17 @@ const QuestionCard: React.FC = () => {
 
   return (
     <div>
-      <p className="question-number"> Question {numberState + 1} / {TOTAL_QUESTIONS}</p>
-      <p className="question"> {format(currentQuestion.question)} </p>
-      {currentQuestion.answers.map((answer: string, idx: string) => (
-        <div key={idx}>
-          <button disabled={userClickedState} value={answer} onClick={checkAnswer}>
-            {format(answer)}
-          </button>
-        </div>
-      ))}
+      <QuestionCardStyle>
+        <Question className="question-number"> Question {numberState + 1} / {TOTAL_QUESTIONS}</Question>
+        <QuestionText className="question"> {format(currentQuestion.question)} </QuestionText>
+        {currentQuestion.answers.map((answer: string, idx: string) => (
+          <div key={idx}>
+            <Answer disabled={userClickedState} value={answer} onClick={checkAnswer}>
+              {format(answer)}
+            </Answer>
+          </div>
+        ))}
+      </QuestionCardStyle>
     </div>
   )
 }
