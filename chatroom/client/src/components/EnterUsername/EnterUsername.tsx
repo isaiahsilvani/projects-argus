@@ -35,7 +35,7 @@ const EnterUsername: React.FC<EnterUsernameProps> = ({ username, setUser, handle
           onChange={e => setUser(e.target.value)}
           placeholder="Enter your username..."
           required={true} />
-        <button onClick={handleClick} type='submit'>Submit</button>
+        <button disabled={username ? false : true}onClick={handleClick} type='submit'>Submit</button>
       </form>
     </>
     );
