@@ -22,7 +22,13 @@ const UserScoreList = () => {
 
     return (
       <div className="userscores-list">
-          USER SCORES LIST
+          {userScores.map((userscore: any, idx: string) => (
+            <div key={idx}>
+              <p>{userscore.username}</p>
+              <p>{userscore.score}</p>
+              <p>{userscore.difficulty}</p>
+            </div>
+          ))}
       </div>
     );
 }
