@@ -170,7 +170,7 @@ function App() {
         
         {(!gameoverState && !loadingState) && <p className="score"><Score>Score: {scoreState}</Score></p>}
         {loadingState && <p>loading...</p> }
-        {(!loadingState && !gameoverState) && (
+        {(!loadingState && !gameoverState && !seeUserScores) && (
             <QuestionCard />
         )}
 
