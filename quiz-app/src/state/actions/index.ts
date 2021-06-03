@@ -40,8 +40,14 @@ interface setQuizSettings {
   settings: {amount: number, difficulty: string}
 }
 
+interface setUserScores {
+  type: ActionType.GETUSERSCORES,
+  userscores: {username: string, score: number, difficulty: string}[]
+}
+
 export type Action = 
   setGameOverAction    | setScoreAction 
 | SetUserAnswers       | SetNumberAction 
 | SetLoadingAction     | SetQuestionsAction 
 | setUserClickedAction | setQuizSettings
+| setUserScores

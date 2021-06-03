@@ -7,6 +7,7 @@ import userAnswersReducer from './userAnswersReducer'
 import scoreReducer from './scoreReducer'
 import userClickedReducer from './userClickedReducer'
 import settingsReducer from './settingsReducer'
+import userScoresReducer from './userScoresReducer'
 
 const reducers = combineReducers({
   gameover: gameoverReducer,
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   userAnswers: userAnswersReducer,
   score: scoreReducer,
   userClicked: userClickedReducer,
-  settings: settingsReducer
+  settings: settingsReducer,
+  userscores: userScoresReducer
 })
 
 export default reducers

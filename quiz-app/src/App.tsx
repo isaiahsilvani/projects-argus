@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 // Components
 import QuestionCard from './components/QuestionCard/QuestionCard'
@@ -8,6 +8,8 @@ import { fetchQuizQuestions, Difficulty } from './services/questions-api'
 import { bindActionCreators } from 'redux';
 import { actionCreators } from './state/';
 import QuizSettings from './components/QuizSettings/QuizSettings';
+import UserInput from './components/UserInput/UserInput';
+import UserScoreList from './components/UserScoreList/UserScoreList';
 
 
 
@@ -29,6 +31,8 @@ function App() {
   console.log(scoreState, loadingState, gameoverState, questionsState, numberState, userAnswersState, userClickedState)
   console.log(settings.amount, settings.difficulty)
   const TOTAL_QUESTIONS = settings.amount
+
+  const [seeUserScores, setSeeUserScores] = useState(false)
   // make the API call when trivia game is started
   const startQuiz = async () => {
     // Reset everything in state so player can do the quiz again
@@ -80,14 +84,22 @@ function App() {
       {questionsState.length === 0 || userAnswersState.length === TOTAL_QUESTIONS ? (
         <>
         {userAnswersState.length === TOTAL_QUESTIONS && (<h2>Game Over</h2>)}
-          <button className="start" onClick={gameoverState ? startQuiz : resetQuiz}>
+        {!loadingState && (
+          <>
+                      <button className="start" onClick={gameoverState ? startQuiz : resetQuiz}>
             {gameoverState ? "Start" : "Reset"}
           </button>
+          <button onClick={() => setSeeUserScores(!seeUserScores)}>
+            {seeUserScores ? 'Close User Scores' : 'See User Scores'}
+          </button>
+          {(!gameoverState && !loadingState) && <UserInput/>}
           {gameoverState && <QuizSettings />}
+          </>
+        )}
         </>
       ): null}
       
-      {!gameoverState && <p className="score">Score: {scoreState}</p>}
+      {(!gameoverState && !loadingState) && <p className="score">Score: {scoreState}</p>}
       {loadingState && <p>loading...</p> }
       {(!loadingState && !gameoverState) && (
           <QuestionCard />
@@ -98,6 +110,10 @@ function App() {
           Next Question
         </button>
       }
+
+      {seeUserScores && (
+        <UserScoreList/>
+      )}
     </div>
   );
 }

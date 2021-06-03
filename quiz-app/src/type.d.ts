@@ -15,3 +15,9 @@ type AnswerObject = {
   correct: boolean,
   correctAnswer: string
 }
+
+type UserScore = {
+  username: string,
+  score: number,
+  difficulty: string
+}

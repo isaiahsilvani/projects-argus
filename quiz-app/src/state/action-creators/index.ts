@@ -2,6 +2,15 @@ import { ActionType } from "../action-types"
 import { Dispatch } from "redux"    // use Dispatch type from redux to please typescript
 import { Action } from '../actions/index'
 
+export const setUserScores = (userscores: {username: string, score: number, difficulty: string}[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.GETUSERSCORES,
+      userscores
+    })
+  }
+}
+
 export const setSettings = (amount: number, difficulty: string) => {
   return (dispatch: Dispatch<Action>) => {
     console.log('clicked action hit: ', amount, difficulty)
