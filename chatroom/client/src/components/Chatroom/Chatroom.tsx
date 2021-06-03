@@ -1,6 +1,6 @@
-import { SocketConstructorOpts } from 'net';
+
 import React, { useEffect, useState} from 'react'
-import io, { Socket } from 'socket.io-client'
+import io from 'socket.io-client'
 import { toast, ToastContainer } from 'react-toastify'
 import EnterUsername from '../EnterUsername/EnterUsername';
 // for redux
@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
 import Messages from '../Messages/Messages';
 
-import * as api from '../../services/message-api'
+
 
 
 const Chatroom: React.FC = () => {
@@ -33,12 +33,10 @@ const Chatroom: React.FC = () => {
   useEffect(() => {
     
       socket.on("username-taken", () => {
-        console.log('username tekn clientside')
         toast.error("Username is taken")
       })
 
       socket.on("username-submitted", () => {
-        console.log('username submitted client')
         setConnected(true)
       })
 
@@ -47,13 +45,11 @@ const Chatroom: React.FC = () => {
       })
 
       socket.on("recieve-message", ({message, username}) => {
-        console.log('reciebed, ', message, username)
         
         const messageFormat = {
           username: username,
           message: message
         }
-        console.log('-----', [...messages, messageFormat])
         // create Message in database with API as well as storing in state
         SetMessages([...messages, messageFormat])
       })

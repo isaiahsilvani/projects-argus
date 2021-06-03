@@ -9,6 +9,7 @@ interface ApiRequest {
 
 export const saveMsgRequest = async (message: any) => {
   console.log(message.length)
+  console.log('save message api request hit----', message)
   if(message.length !== 0) {
     const payload = {
       username: message[0].username,

@@ -25,6 +25,12 @@ const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMess
       })
     }, []);
 
+    const handleKeyPress = (e: any) => {
+      if(e.key === 'Enter'){
+        handleSendMessage()
+      }
+    }
+
     return (
       <div className="messages">
       <li className="message-list scrollable">
@@ -40,6 +46,7 @@ const Messages: React.FC<MessagesProps> = ({ message, setMessage, handleSendMess
           placeholder="Type your message..." 
           value={message}
           onChange={e => setMessage(e.target.value)} 
+          onKeyPress={handleKeyPress}
           />
         <button onClick={handleSendMessage} type='submit'>Send</button>
     </div>
