@@ -21,3 +21,13 @@ type UserScore = {
   score: number,
   difficulty: string
 }
+
+type State = {
+  score: number,
+  loading: boolean,
+  gameover: boolean,
+  questions: Question[],
+  number: number,
+  userAnswers: AnswerObject[],
+  userClicked: boolean,
+}

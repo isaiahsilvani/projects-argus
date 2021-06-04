@@ -17,13 +17,13 @@ function App() {
   const { setUserClicked, setGameover, setLoading, setQuestions, setScore, setNumber, setUserAnswers, setSettings } = bindActionCreators(actionCreators, dispatch)
 
   // set up so you can also see state
-  const scoreState = useSelector((state: any) => state.score)
-  const loadingState = useSelector((state: any) => state.loading)
-  const gameoverState = useSelector((state: any) => state.gameover)
-  const questionsState = useSelector((state: any) => state.questions)
-  const numberState = useSelector((state: any) => state.number)
-  const userAnswersState = useSelector((state: any) => state.userAnswers)
-  const userClickedState = useSelector((state: any) => state.userClicked)
+  const scoreState = useSelector((state: State) => state.score)
+  const loadingState = useSelector((state: State) => state.loading)
+  const gameoverState = useSelector((state: State) => state.gameover)
+  const questionsState = useSelector((state: State) => state.questions)
+  const numberState = useSelector((state: State) => state.number)
+  const userAnswersState = useSelector((state: State) => state.userAnswers)
+  const userClickedState = useSelector((state: State) => state.userClicked)
   const settings = useSelector((state: any) => state.settings)
 
   const TOTAL_QUESTIONS = settings.amount
