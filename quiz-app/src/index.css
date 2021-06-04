@@ -1,0 +1,7 @@
+html { 
+  background: url("https://i.pinimg.com/originals/a8/f6/bd/a8f6bd191cdaaefd240eff1b6efde121.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

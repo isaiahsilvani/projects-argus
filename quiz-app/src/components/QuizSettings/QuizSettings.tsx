@@ -6,26 +6,30 @@ import { actionCreators } from '../../state';
 import styled from '@emotion/styled'
 
 const Settings = styled.div`
-  background-color: lightblue;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: 1.5em;
 `
 
 const Label = styled.label`
   margin: 10px;
+  text-align: center;
 `
 
 const Input = styled.input`
   font-size: 1em;
   text-align: center;
+  width: 50%;
 `
 
 const Select = styled.select`
   font-size: 1em;
   text-align: center;
   margin-bottom: 1.3em;
+  width: 50%;
 `
 
 const QuizSettings = () => {
@@ -54,7 +58,7 @@ const QuizSettings = () => {
     return (
       <div className="quiz-settings">
         <Settings>
-          <Label># of Questions: </Label>
+          <Label>Choose # of Questions: </Label>
           <Input 
             type="number" 
             id="quiznum" 

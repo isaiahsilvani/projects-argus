@@ -7,11 +7,22 @@ import styled from '@emotion/styled'
 
 const UserScores = styled.div`
   padding: 10px;
-  background-color: lightblue;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 3px solid black;
+  -moz-box-shadow: 3px 3px 3px black;
+  -webkit-box-shadow: 3px 3px 3px black;
+  box-shadow: 7px 7px 7px black;
   display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: center;
+`
+
+const Head = styled.span`
+  font-size: 2.5em;
+  font-weight: 900;
+  margin: 10px 0 15px 0;
 `
 
 const Td = styled.td`
@@ -19,9 +30,10 @@ const Td = styled.td`
   font-size: 1.3em;
   padding: 0.3em 1em;
 `
-
-const Table = styled.table`
-  border: 1px solid black;
+const Hr = styled.hr`
+  width: 100%;
+  margin: 0;
+  padding: 0;
 `
 
 const Thead = styled.thead`
@@ -49,8 +61,9 @@ const UserScoreList = () => {
     return (
       <div className="userscores-list">
         <UserScores>
-        <h2>User Scores</h2>
-        <Table>
+        <Head>User Scores</Head>
+        <Hr></Hr>
+        <table>
           <Thead>
             <tr>
               <Td>Username</Td>
@@ -68,7 +81,7 @@ const UserScoreList = () => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
         </UserScores>
       </div>
     );

@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 // For Redux..
 import { Provider } from 'react-redux'
 import { store } from './state/index'
+import './index.css'
+
 
 ReactDOM.render(
   <React.StrictMode>
