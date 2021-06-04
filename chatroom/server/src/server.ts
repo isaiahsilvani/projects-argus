@@ -4,10 +4,8 @@ import { Server, Socket } from 'socket.io'
 import config from './config/config'
 import logging from './config/logging'
 import { getUsers, userJoin, userLeave} from './util/user'
-require("./config/database");
 
 const NAMESPACE = 'Server'
-const messageRoutes = require('./routes/message')
 
 const app = express()
 
@@ -40,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 /** Routes **/
-app.use('/api/messages', messageRoutes)
+
 
 /** Error Handling **/
 app.use((req, res, next) => {
@@ -61,18 +59,18 @@ io.on("connection", (socket) => {
 
   socket.on("handle-connection", (username: string) => {
     if (!userJoin(socket.id, username)) {
-        console.log('username taken hit server')
+
     } else {
         io.emit('username-submitted')
-        console.log('username submited hit')
+
         const users = getUsers()
-        console.log('users', users)
+
         io.emit("get-connected-users", getUsers())
     }
   })
 
   socket.on("message", ({message, username}) => {
-    console.log('backend hit message', message, username)
+
     if(message.length > 0){
       io.emit("recieve-message", ({message, username}))
     }
