@@ -25,6 +25,11 @@ interface setCurrent {
   current: boolean
 }
 
+interface setClickedAction {
+  type: ActionType.SETCLICKED,
+  clicked: boolean
+}
+
 interface clearMessagesAction {
   type: ActionType.CLEARMESSAGES
 }
@@ -37,4 +42,4 @@ interface GetMessagesAction {
 export type Action = SetUsernameAction | setConnectedUsersAction 
 | SetConnectedAction | setMessagesAction 
 | setCurrent         | clearMessagesAction 
-| GetMessagesAction
+| GetMessagesAction  | setClickedAction

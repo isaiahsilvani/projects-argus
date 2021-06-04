@@ -4,13 +4,15 @@ import connectedReducer from './connectedReducer'
 import connectedUsersReducer from './connectedUsersReducer'
 import messagesReducer from './messagesReducer'
 import currentReducer from './currentReducer'
+import clickedReducer from './clickedReducer'
 
 const reducers = combineReducers({
   username: usernameReducer,
   connected: connectedReducer,
   connectedUsers: connectedUsersReducer,
   messages: messagesReducer,
-  current: currentReducer
+  current: currentReducer,
+  clicked: clickedReducer
 })
 
 export default reducers

@@ -22,6 +22,15 @@ export const setConnected = (connected: boolean) => {
   }
 }
 
+export const setClicked = (clicked: boolean) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.SETCLICKED,
+      clicked
+    })
+  }
+}
+
 export const setCurrent = (current: boolean) => {
   return (dispatch: Dispatch<Action>) => {
     console.log("action-creator --- connected bool. that's being sent", current)

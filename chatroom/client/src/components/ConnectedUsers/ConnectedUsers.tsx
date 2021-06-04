@@ -4,6 +4,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { store } from '../../state/store'
 import User from './User';
+import styled from '@emotion/styled'
+
+const ConnectedUsersBlock = styled.div`
+  display: inline;
+  background-color: grey;
+  height: 90vh;
+  text-align: center;
+`
+
+const Loading = styled.div`
+  grid-column: 2 / 2
+`
+
+const Username = styled.span`
+  text-align: center
+`
+
+const Header = styled.div`
+  font-size: 1.2em;
+`
 
 type IUser = {
   id: string,
@@ -19,21 +39,22 @@ const ConnectedUsers = () => {
     console.log({ connectedUsers })
 
     return (
-      <div className="connected-users">
-        <h2>Connected Users</h2>
+      <ConnectedUsersBlock>
+        <Header>Connected Users</Header>
         <ul>
+          {connectedUsers.length === 0 && <Loading>Loading users...</Loading>}
           {connectedUsers.map((user: any) => (
             <div key={user.id}>
               {
                 !(user.username === connectedUser) && 
                 <>
-                <h2>{user.username}</h2>
+                <Username>{user.username}</Username>
                 </>
               }
             </div>
           ))}
         </ul>
-      </div>
+      </ConnectedUsersBlock>
     );
 }
 

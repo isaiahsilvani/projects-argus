@@ -1,14 +1,16 @@
 import React from 'react'
+import styled from '@emotion/styled'
 
-interface FooterProps {
+const FooterBlock = styled.div`
+  background-color: lightpink;
+  height: 5vh;
+`
 
-}
-
-const Footer: React.FC<FooterProps> = ({}) => {
+const Footer = () => {
     return (
-      <div className="header">
+      <FooterBlock>
         FOOTER
-      </div>
+      </FooterBlock>
     );
 }
 

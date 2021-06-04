@@ -16,9 +16,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {username}
       <Chatroom />
-      <Footer />
     </div>
   );
 }

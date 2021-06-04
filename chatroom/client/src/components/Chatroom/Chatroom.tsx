@@ -6,23 +6,33 @@ import EnterUsername from '../EnterUsername/EnterUsername';
 // for redux
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
-
+import * as api from '../../services/message-api'
 import { bindActionCreators } from 'redux';
 import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
 import Messages from '../Messages/Messages';
+import styled from '@emotion/styled'
 
+const ChatroomBlock = styled.div`
+  background-color: lightblue;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas: 
+  "chat users"
+`
 
 
 
 const Chatroom: React.FC = () => {
   // dispatch actions
   const dispatch = useDispatch()
-  const { setConnected, setConnectedUsers, SetMessages } = bindActionCreators(actionCreators, dispatch)
+  const { setConnected, setConnectedUsers, SetMessages, ClearMessages, setClicked } = bindActionCreators(actionCreators, dispatch)
   // redux state
   const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
   const current = useSelector((store: State) => store.current)
   const messages = useSelector((store: State) => store.messages)
+  const clicked = useSelector((store: State) => store.clicked)
 
   // state for input fields
   const [username, setUsername] = useState("")
@@ -50,28 +60,33 @@ const Chatroom: React.FC = () => {
           username: username,
           message: message
         }
+        // if this message BELONGS TO THE CURRENT USER TO AVOID DUPLICATE SOCKET DATA STORAGE
         // create Message in database with API as well as storing in state
-        SetMessages([...messages, messageFormat])
+        console.log(' set messages, does username === user? ', messageFormat.username === username)
+        console.log('message username: ', messageFormat.username, "current user: ", username)
+        console.log('clicked conditional statement here folks... ', clicked)
+        if (clicked) { 
+          setClicked(false)
+          console.log('set clicked set to false agagin.... ', clicked)
+          SetMessages([...messages, messageFormat])
+        }
+        
       })
   }, [])
 
   const handleConnection = () => {
-      console.log('handle connection hit', username)
       socket.emit("handle-connection", username)
   }
 
   const handleSendMessage = () => {
-    console.log('handle send hit')
+    setClicked(true)
+    console.log('set clicked was triggered..... ', clicked)
     socket.emit("message", {message, username})
     setMessage("")
   }
 
-  console.log(user)
-
   return (
-    <div className="chatroom">
-      CHATROOM HERE
-      {user}
+    <ChatroomBlock>
       {
         (!connected || !current) &&
         <EnterUsername 
@@ -92,7 +107,7 @@ const Chatroom: React.FC = () => {
         </>
       }
       <ToastContainer position="bottom-right" />
-    </div>
+    </ChatroomBlock>
   );
 }
 
