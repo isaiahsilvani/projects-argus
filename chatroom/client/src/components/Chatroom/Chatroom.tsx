@@ -3,7 +3,6 @@ import React, { useEffect, useState} from 'react'
 import { io } from 'socket.io-client'
 import { toast, ToastContainer } from 'react-toastify'
 import EnterUsername from '../EnterUsername/EnterUsername';
-// for redux
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -14,9 +13,8 @@ import { ChatroomBlock } from './Chatroom.css.js'
 const Chatroom: React.FC = () => {
   // dispatch actions
   const dispatch = useDispatch()
-  const { setConnected, setConnectedUsers, SetMessages, ClearMessages, setClicked } = bindActionCreators(actionCreators, dispatch)
+  const { setConnected, setConnectedUsers, SetMessages } = bindActionCreators(actionCreators, dispatch)
   // redux state
-  const user = useSelector((store: State) => store.username)
   const connected = useSelector((store: State) => store.connected)
   const current = useSelector((store: State) => store.current)
   const messages = useSelector((store: State) => store.messages)

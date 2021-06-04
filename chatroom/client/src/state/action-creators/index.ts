@@ -4,7 +4,6 @@ import { Action } from '../actions/index'
 
 export const setUsername = (username: string) => {
   return (dispatch: Dispatch<Action>) => {
-    console.log("action-creator --- user name that's being sent", username)
     dispatch({
       type: ActionType.SETUSERNAME,
       username
@@ -14,7 +13,6 @@ export const setUsername = (username: string) => {
 
 export const setConnected = (connected: boolean) => {
   return (dispatch: Dispatch<Action>) => {
-    console.log("action-creator --- connected bool. that's being sent", connected)
     dispatch({
       type: ActionType.SETCONNECTED,
       connected
@@ -33,7 +31,6 @@ export const setClicked = (clicked: boolean) => {
 
 export const setCurrent = (current: boolean) => {
   return (dispatch: Dispatch<Action>) => {
-    console.log("action-creator --- connected bool. that's being sent", current)
     dispatch({
       type: ActionType.SETCURRENT,
       current
@@ -43,7 +40,6 @@ export const setCurrent = (current: boolean) => {
 
 export const setConnectedUsers = (connectedUsers: {id: string, username: string}[]) => {
   return (dispatch: Dispatch<Action>) => {
-    console.log("action-creator --- connected bool. that's being sent", connectedUsers)
     dispatch({
       type: ActionType.SETCONNECTEDUSERS,
       connectedUsers
@@ -53,7 +49,6 @@ export const setConnectedUsers = (connectedUsers: {id: string, username: string}
 
 export const SetMessages = (messages: {message: string, username: string}[]) => {
   return (dispatch: Dispatch<Action>) => {
-    console.log("action-creator --- connected bool. that's being sent", messages)
     dispatch({
       type: ActionType.SETMESSAGES,
       messages
