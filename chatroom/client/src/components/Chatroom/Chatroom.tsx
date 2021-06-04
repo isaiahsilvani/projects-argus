@@ -41,7 +41,10 @@ const Chatroom: React.FC = () => {
   let socket = io(ENDPOINT)
 
   useEffect(() => {
-    
+      if(username === ""){
+        setConnected(false)
+      }
+
       socket.on("username-taken", () => {
         toast.error("Username is taken")
       })
