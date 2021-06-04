@@ -58,24 +58,24 @@ const server = http.createServer(app)
 const io = new Server(server, {cors: {origin: "http://localhost:3000"}})
 
 io.on("connection", (socket) => {
-  socket.join('chatroom')
 
   socket.on("handle-connection", (username: string) => {
     if (!userJoin(socket.id, username)) {
         console.log('username taken hit server')
-        io.emit("username-taken")
     } else {
         io.emit('username-submitted')
         console.log('username submited hit')
         const users = getUsers()
         console.log('users', users)
-        io.to('chatroom').emit("get-connected-users", getUsers())
+        io.emit("get-connected-users", getUsers())
     }
   })
 
   socket.on("message", ({message, username}) => {
     console.log('backend hit message', message, username)
-    io.emit("recieve-message", ({message, username}))
+    if(message.length > 0){
+      io.emit("recieve-message", ({message, username}))
+    }
   })
 
   socket.on("disconnect", () => {

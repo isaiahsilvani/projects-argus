@@ -8,19 +8,12 @@ const deleteMessages = (req: Request, res: Response, next: NextFunction) => {
   .then(()=> {
     console.log('messages deleted!!!')
     // create message delete in database
-    Message.create({ 
-      message: "Welcome to the chat!",
-      username: "admin",
-    })
-    .then((message) => {
-      console.log('admin message created', message)
-      res.status(200)
-    })
-    .catch((error) => {
-      return res.status(500).json({
-        message: error.message,
-        error
-      })
+    res.status(200)
+  })
+  .catch((error) => {
+    return res.status(500).json({
+      message: error.message,
+      error
     })
   })
 }
@@ -34,12 +27,8 @@ const getMessages = (req: Request, res: Response, next: NextFunction) => {
         messages: results
       })
     } else {
-      return res.status(200).json([{
-        message: 'Welcome to the room',
-        username: 'admin'
-      }])
+      return res.status(200)
     }
-
   })
   .catch((error) => {
     return res.status(500).json({
@@ -52,20 +41,22 @@ const getMessages = (req: Request, res: Response, next: NextFunction) => {
 const createMessage = (req: Request, res: Response, next: NextFunction) => {
   console.log('create message hit', req.body)
   let { message, username } = req.body
-
-  const newMessage = new Message({
-    _id: new mongoose.Types.ObjectId(),
-    message,
-    username
-  })
-
-  return newMessage.save()
-  .then((result) => {
-    console.log('message created --', result)
-    return res.status(201).json({
-      message: result
+  console.log('is username === to admin?', username === true)
+  if (username !== "admin") {
+    const newMessage = new Message({
+      _id: new mongoose.Types.ObjectId(),
+      message,
+      username
     })
-  })
+  
+    return newMessage.save()
+    .then((result) => {
+      console.log('message created --', result)
+      return res.status(201).json({
+        message: result
+      })
+    })
+  }
 }
 
 export default {
