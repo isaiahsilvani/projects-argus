@@ -6,11 +6,23 @@ import styled from '@emotion/styled'
 
 const EnterUsernameBlock = styled.div`
   display: flex;
-  padding-top: 5em;
+  margin-top: 5.5em;
   grid-column: span 2;
+  background-color: white;
+  height: 70%;
+  border-radius: 30px;
+  width: 80%;
+  justify-self: center;
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  -webkit-box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 1px 5px 9px rgba(0,0,0,0.75);
+  box-shadow: -1px 1px 5px 9px white;
+`
+const H1 = styled.h1`
+  font-size: 3em;
+  margin-bottom: 30px;
 `
 
 const Controls = styled.div`
@@ -18,7 +30,6 @@ const Controls = styled.div`
 `
 
 const Input = styled.input`
-  margin-top: 1em;
   font-size: 1.3em;
   padding: 5px;
   border-radius: 5px;
@@ -27,8 +38,17 @@ const Input = styled.input`
 const Button = styled.button`
   margin-top: 1.4em;
   font-size: 1.3em;
+  padding: 10px;
+  &:hover{
+    background-color: #E6F7F7;
+    cursor: pointer;
+  }
+  &:active{
+    color: white;
+    background-color: #138080
+  }
   &:disabled{
-    color: grey
+    
   }
 `
 
@@ -53,7 +73,7 @@ const EnterUsername: React.FC<EnterUsernameProps> = ({ username, setUser, handle
 
     return (
       <EnterUsernameBlock>
-      <h1>Enter the Chatroom</h1>
+      <H1>Enter the Chatroom</H1>
       <form onSubmit={e => {
         e.preventDefault()
         handleConnection()

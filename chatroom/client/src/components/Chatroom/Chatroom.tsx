@@ -6,22 +6,21 @@ import EnterUsername from '../EnterUsername/EnterUsername';
 // for redux
 import { actionCreators } from '../../state/';
 import { useSelector, useDispatch } from 'react-redux'
-import * as api from '../../services/message-api'
 import { bindActionCreators } from 'redux';
 import ConnectedUsers from '../ConnectedUsers/ConnectedUsers';
 import Messages from '../Messages/Messages';
 import styled from '@emotion/styled'
 
 const ChatroomBlock = styled.div`
-  background-color: lightblue;
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 76%);
+  font-family: 'Poppins', sans-serif;
   height: 90vh;
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-areas: 
   "chat users"
 `
-
-
 
 const Chatroom: React.FC = () => {
   // dispatch actions
@@ -37,8 +36,9 @@ const Chatroom: React.FC = () => {
   // state for input fields
   const [username, setUsername] = useState("")
   const [message, setMessage] = useState("")
+  const ENDPOINT = "http://localhost:1338"
 
-  let socket = io("http://localhost:1338")
+  let socket = io(ENDPOINT)
 
   useEffect(() => {
     
@@ -62,24 +62,18 @@ const Chatroom: React.FC = () => {
         }
         // if this message BELONGS TO THE CURRENT USER TO AVOID DUPLICATE SOCKET DATA STORAGE
         // create Message in database with API as well as storing in state
-        console.log(' set messages, does username === user? ', messageFormat.username === username)
-        console.log('message username: ', messageFormat.username, "current user: ", username)
-        console.log('clicked conditional statement here folks... ', clicked)
-        if (clicked) { 
-          setClicked(false)
-          console.log('set clicked set to false agagin.... ', clicked)
+        console.log('messages to check: ', messages)
+        console.log('current message: ', messageFormat)
+        console.log(message.length === 0)
           SetMessages([...messages, messageFormat])
-        }
-        
       })
-  }, [])
+  }, [ENDPOINT])
 
   const handleConnection = () => {
       socket.emit("handle-connection", username)
   }
 
   const handleSendMessage = () => {
-    setClicked(true)
     console.log('set clicked was triggered..... ', clicked)
     socket.emit("message", {message, username})
     setMessage("")
