@@ -19,7 +19,7 @@ const DeleteMsgs = styled.div`
   font-family: 'Ubuntu', sans-serif;
   justify-content: space-between;
   background: rgb(208,201,229);
-  background: linear-gradient(90deg, rgba(208,201,229,1) 25%, rgba(103,212,215,0.7973564425770308) 75%);
+  background: linear-gradient(90deg, rgba(208,201,229,1) 25%, rgba(214,239,240,1) 75%);
   align-items: center;
   padding-right: 3em;
 `
@@ -27,6 +27,10 @@ const Center = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+`
+
+const Underline = styled.span`
+  text-decoration: underline;
 `
 
 const Button = styled.button`
@@ -55,6 +59,7 @@ const Span = styled.span`
 `
 const NextSpan = styled.span`
   font-size: 2em;
+  text-decoration: underline;
   font-weight: bold;
   letter-spacing: 0.07em;
   justify-self: center;

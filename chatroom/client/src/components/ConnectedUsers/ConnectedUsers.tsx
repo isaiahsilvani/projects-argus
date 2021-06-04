@@ -36,6 +36,7 @@ const Header = styled.div`
   font-size: 1.3em;
   font-weight: 900;
   margin-top: 1em;
+  text-decoration: underline;
 `
 
 type IUser = {
