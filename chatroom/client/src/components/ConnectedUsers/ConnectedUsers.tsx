@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import { ConnectedUsersBlock, Center, Loading, Username, Header } from './ConnectedUsers.css.js'
 
 const ConnectedUsers = () => {
+  
     const connectedUsers = useSelector((store: State) => store.connectedUsers)
     const connectedUser = useSelector((store: State) => store.username)
-    console.log({ connectedUsers })
 
     return (
       <ConnectedUsersBlock>

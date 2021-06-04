@@ -62,6 +62,7 @@ const Chatroom: React.FC = () => {
   }, [ENDPOINT])
 
   const handleConnection = () => {
+      console.log('socket, you better emit!!')
       socket.emit("handle-connection", username)
   }
 
