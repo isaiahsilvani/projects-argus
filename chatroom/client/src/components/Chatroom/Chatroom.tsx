@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState} from 'react'
-import io from 'socket.io-client'
+import { io } from 'socket.io-client'
 import { toast, ToastContainer } from 'react-toastify'
 import EnterUsername from '../EnterUsername/EnterUsername';
 // for redux
@@ -27,7 +27,12 @@ const Chatroom: React.FC = () => {
   const [message, setMessage] = useState("")
   const ENDPOINT = "http://localhost:1338"
 
-  let socket = io(ENDPOINT)
+  const socket = io(ENDPOINT, {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax : 5000,
+    reconnectionAttempts: 99999
+})
 
   useEffect(() => {
       if(username === ""){
