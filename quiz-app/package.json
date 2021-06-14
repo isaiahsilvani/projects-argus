@@ -21,14 +21,20 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
+    "ts-node": "10.0.0",
     "typescript": "^4.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
+    "postinstall": "tsc",
+    "dev-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "15.9.0"
   },
   "eslintConfig": {
     "extends": [
